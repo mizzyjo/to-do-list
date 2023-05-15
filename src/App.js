@@ -8,9 +8,7 @@ import List from './components/List';
 function App() {
   return (
     <>
-      <nav>
-        <Navbar />
-      </nav>
+      <nav>{/* <Navbar /> */}</nav>
       <section>
         <Container></Container>
       </section>

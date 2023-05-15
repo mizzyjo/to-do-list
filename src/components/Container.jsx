@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import Item from './Item';
-import Form from './Form';
-
 
 export default function Container() {
   const [itemId, setItemId] = useState(3);
@@ -9,44 +6,56 @@ export default function Container() {
     {
       id: 0,
       text: '공부하기',
+      completed: false,
+      listStyle : "textDecoration: 'none'"
     },
     {
       id: 1,
       text: '운동하기',
+      completed: false,
+      listStyle : "textDecoration: 'none'"
     },
     {
       id: 2,
-      text: '독서하기'
+      text: '독서하기',
+      completed: false,
+      listStyle : "textDecoration: 'none'"
     },
   ]);
 
-  const handleOnAdd = (text) => {
-    setItems([ ...items, {id: itemId, text:text}])
-    setItemId(itemId + 1);
-    console.log('you clicked ADD');
-  }
+  const setStyle = () => {
+    // console.log();
+    items.filter((item) => {
+      setItems( [...items, item.listStyle = "textDecoration: 'line'"] );
 
-  const handleOnDel = (id) => {
-    console.log(`you clicked DEL: ${id}`);
-    setItems(items.filter((item) => {
-      if(id != item.id) {
-        console.log(`id: ${id} itemid : ${item.id}`);
-        return item;
-      }
-    }))
+      console.log(`textdecoration : ${item.listStyle.textDecoration}`); // none
+    });
+    console.log(items);
   }
-
 
   return (
     <>
-      { 
-        items.map((item, index) => {
-          // return <Item id={index} item={item} handleOnDel={handleOnDel}/>
-          return <Item id={item.id} item={item} handleOnDel={handleOnDel}/>
+      <nav>
+        <button onClick={setStyle}>Mode</button>
+        <button>All</button>
+        <button>Active</button>
+        <button>Completed</button>
+      </nav>
 
-        })
-      }
-      <Form handleOnAdd={handleOnAdd} />
+      <ul>
+        {
+          items.map((item) => {
+            return (
+              <li>
+                <input type='checkbox'></input>
+                <span>{item.text} {item.listStyle}</span>
+                <button>DEL</button>
+              </li>
+            )
+          })
+        }
+        
+      </ul>
     </>
   );
 }

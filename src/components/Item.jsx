@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 
-export default function Item({id, item, handleOnDel}) {
-  const [line, setLine] = useState({ 
-    textDecoration: 'none' 
-  });
-  
+export default function Item({id, item, handleOnDel, handleOnCompleted}) {
+  const [line, setLine] = useState({ textDecoration: 'none' });
+  let checkboxValue;
+
   const getCheckboxValue = (e) => {
-    console.log(e.target.checked);
+    checkboxValue = e.target.checked;
+    console.log(`checkboxValue : ${checkboxValue}`);
+
     if(e.target.checked){
       setLine({...line, textDecoration: 'line-through'});
-      console.log(`line : ${line}`);
+      console.log(`checkedItem's id ${id}`);
+      handleOnCompleted(id);
+
     }else {
       setLine({...line, textDecoration: 'none'});
-      console.log(`line : ${line}`);
     }
   }
 
