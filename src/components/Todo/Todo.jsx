@@ -2,33 +2,32 @@ import React, { useState } from 'react';
 import {FaTrashAlt} from 'react-icons/fa';
 export default function Todo({ todo, onUpdate, onDelete }) {
   
-  const [ status, setStatus ] = useState('active');
+  const [status, setStatus] = useState('active');
+
   const handleChange = (e) => {
-    const status = e.target.checked ? 'completed' : 'active';
-    setStatus(status);
-    onUpdate({ ...todo, status:status});
+    console.log(e.target.checked);
+    setStatus(e.target.checked ? 'completed' : 'active');
+    onUpdate(todo);
   }
-
-
+  
   const handleDelete = () => {
-    // console.log(`deleted todo : ${todo.text}`);
     onDelete(todo);
   }
 
-  return(
+  return (
     <>
       <li>
         <input 
-          type='checkbox'
-          id='checkbox' 
-          onChange={handleChange} 
+          type="checkbox" 
+          id='checkbox'
+          value={todo.text}
+          onChange={handleChange}
         />
-        <label htmlFor="checkbox">{todo.text}</label>
+        {todo.text}
         <button onClick={handleDelete}>DEL</button>
       </li>
     </>
-  );
-
+  )
 
 
 
