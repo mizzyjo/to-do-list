@@ -3,26 +3,25 @@ import AddTodo from '../AddTodo/AddTodo';
 import Todo from '../Todo/Todo';
 
 export default function TodoList() {
-  const [ todos, setTodos ] = useState([
-    {id: 123, text: '독서하기', status: 'active'},
-    {id: 124, text:'운동하기', status: 'active'},
-  ]);
+  const [ todos, setTodos] = useState([
+    { id: 123, text: 'workout', status: 'active'},
+    { id: 124, text: 'study', status: 'active'},
+  ])
 
   const handleUpdate = (updated) => {
     setTodos(todos.map((todo) => {
-      return todo.id === updated.id ? updated : todo;
-    }));
+      return todo.id === updated.id ? updated : todo
+    }))
   }
 
   const handleDelete = (deleted) => {
     setTodos(todos.filter((todo) => {
-      return todo.id !== deleted.id
+      return deleted.id !== todo.id
     }))
   }
 
   const handleAdd = (added) => {
-    console.log(todos);
-    setTodos([...todos, added])
+    setTodos([ ...todos, added])
   }
 
   return (
@@ -30,7 +29,7 @@ export default function TodoList() {
       <ul>
         {
           todos.map((todo) => {
-            return <Todo todo={todo} onUpdate={handleUpdate} onDelete={handleDelete}>{todo.text}</Todo>
+            return <Todo todo={todo} onUpdate={handleUpdate} onDelete={handleDelete}></Todo>
           })
         }
       </ul>
