@@ -8,16 +8,29 @@ const filters = ['all', 'active', 'completed'];
 function App() {
   const [filter, setFilter] = useState(filters[0]);
 
+  const handleFilter = (filtered) => {
+    setFilter(filtered);
+  };
+
   return (
     <>
-      <Header
-        filters={filters}
-        filter={filter}
-        onFilterChange={(filter) => setFilter(filter)}
-      />
+      <Header filters={filters} filter={filter} onFilterChange={handleFilter} />
       <TodoList filter={filter} />
     </>
   );
+
+  // const [filter, setFilter] = useState(filters[0]);
+
+  // return (
+  //   <>
+  //     <Header
+  //       filters={filters}
+  //       filter={filter}
+  //       onFilterChange={(filter) => setFilter(filter)}
+  //     />
+  //     <TodoList filter={filter} />
+  //   </>
+  // );
 }
 
 export default App;
