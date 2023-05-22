@@ -1,6 +1,6 @@
 // TodoList.jsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddTodo from '../AddTodo/AddTodo';
 import Todo from '../Todo/Todo';
 
@@ -8,10 +8,9 @@ export default function TodoList({ filter }) {
 
 
 
-  const [todos, setTodos] = useState([
-    {id: '123', text:'공부하기', status: 'active'},
-    {id: '124', text:'운동하기', status: 'active'}
-  ]);
+  // const [todos, setTodos] = useState(localStorage.getItem('todos'));
+  const [todos, setTodos] = useState(readTodosFromLocalStorage());
+
 
   const handleAdd = (todo) => {
     // 새로운 투두를 todos에 업데이트
@@ -29,6 +28,10 @@ export default function TodoList({ filter }) {
     // 삭제하고자 하는 id가 아닌 것들만 모아서 set 해준다.
     setTodos(todos.filter(t => t.id !== deleted.id));
   }
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const filtered = getFilteredItems(todos, filter);
   return (
@@ -56,6 +59,11 @@ export default function TodoList({ filter }) {
       <AddTodo onAdd={handleAdd}/>
     </section>
   );
+}
+
+function readTodosFromLocalStorage() {
+  const todos = localStorage.getItem('todos');
+  return todos ? JSON.parse(todos) : [];
 }
 
 function getFilteredItems(todos, filter) {
