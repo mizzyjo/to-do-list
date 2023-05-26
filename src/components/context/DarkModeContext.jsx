@@ -46,6 +46,7 @@ const DarkModeContext = createContext();
 export function DarkModeProvider({children}) {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
+    // 이전 값을 받아와서 반대값으로 세팅
     // setDarkMode(prev => !prev);
     setDarkMode(!darkMode);
     updateDarkMode(!darkMode);
