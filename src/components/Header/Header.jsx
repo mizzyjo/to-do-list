@@ -1,18 +1,10 @@
 // Header.jsx
 
 import React from 'react';
-import { useDarkMode } from '../context/DarkModeContext';
-import { HiMoon, HiSun } from 'react-icons/hi';
 
 export default function Header({filters, filter, onFilterChange}) {
-  const {darkMode, toggleDarkMode} = useDarkMode();
-  // const handleDarkMode = () => {toggleDarkMode}
   return (
     <header>
-      <button onClick={toggleDarkMode}>
-        {!darkMode && <HiMoon />}
-        {darkMode && <HiSun />}
-      </button>
       <ul>
         {
           filters.map((value, index) => (
