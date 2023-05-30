@@ -7,20 +7,19 @@ const DarkModeContext = createContext();
 export function DarkModeProvider({children}) {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
-    // 이전 값을 받아와서 반대값으로 세팅
-    // setDarkMode(prev => !prev);
-    setDarkMode(!darkMode);
+    setDarkMode(prev => !prev);
     updateDarkMode(!darkMode);
   }
+
   return (
-    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <DarkModeProvider.Provider value={{ darkMode, toggleDarkMode }}>
       {children}
-    </DarkModeContext.Provider>
-  );
+    </DarkModeProvider.Provider>
+  )
 }
 
 function updateDarkMode(darkMode) {
-  if(darkMode){
+  if(darkMode) {
     document.documentElement.classList.add('dark');
   } else {
     document.documentElement.classList.remove('dark');
