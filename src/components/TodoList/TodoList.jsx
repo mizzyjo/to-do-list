@@ -45,5 +45,5 @@ function getFilteredItems(todos, filter) {
   if(filter === 'all') {
     return todos;
   }
-  return todos.filter(() => {})
+  // return todos.filter(() => {})
 }
