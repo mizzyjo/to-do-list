@@ -4,14 +4,14 @@ import AddTodo from '../AddTodo/AddTodo';
 import Todo from '../Todo/Todo';
 
 export default function TodoList({ filter }) {
-  const [todos, setTodos] = useState(readTodosFromLocalStorage());
+  const [todos, setTodos] = useState(getTodos);
 
   const handleUpdate = (updated) => {
     setTodos(todos.map((todo) => todo.id === updated.id ? updated : todo))
   }
 
   const handleDelete = (deleted) => {
-    setTodos(todos.filter((todo) => todo.id != deleted.id))
+    setTodos(todos.filter((todo) => todo.id !== deleted.id))
   }
 
   const handleAdd = (added) => {
@@ -42,7 +42,7 @@ export default function TodoList({ filter }) {
   );
 }
 
-function readTodosFromLocalStorage() {
+function getTodos() {
   const todos = localStorage.getItem('todos');
   return todos ? JSON.parse(todos) : [];
 }
@@ -51,5 +51,5 @@ function getFilteredItems(todos, filter) {
   if(filter === 'all') {
     return todos;
   }
-  // return todos.filter(() => {})test
+  return todos.filter((todo) => todo.status === filter );
 }
